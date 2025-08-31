@@ -1,6 +1,14 @@
 import { BrowserContext } from 'playwright';
-import session from '../config/sessions.json' with { type: 'json' };
+import fs from 'fs';
+import path from 'path';
 
 export async function loadSession(context: BrowserContext): Promise<void> {
-  context.addCookies(session.user1);
+  const sessionsPath = path.resolve(
+    import.meta.dirname,
+    '../config/sessions.json'
+  );
+  const raw = fs.readFileSync(sessionsPath, 'utf-8');
+  const data = JSON.parse(raw);
+
+  context.addCookies(data.user1);
 }
