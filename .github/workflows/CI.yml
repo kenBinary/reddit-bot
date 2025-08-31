@@ -31,3 +31,11 @@ jobs:
 
       - name: Build TypeScript project
         run: npm run build
+
+      - name: Run secret scanning
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: main
+          head: HEAD
+          extra_args: --debug --only-verified
