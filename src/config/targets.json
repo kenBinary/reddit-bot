@@ -1,0 +1,5 @@
+{
+  "subreddits": ["pinoyProgrammer", "philippines"],
+  "min_score": 10,
+  "max_post_age_hours": 3
+}
