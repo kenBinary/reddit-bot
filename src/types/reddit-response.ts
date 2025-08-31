@@ -1,24 +1,20 @@
-interface LinkFlairRichtext {
-  e: string;
-  t: string;
+interface RedditListing {
+  kind: string;
+  data: ListingData;
 }
 
-interface RedditVideo {
-  bitrate_kbps: number;
-  fallback_url: string;
-  has_audio: boolean;
-  height: number;
-  width: number;
-  scrubber_media_url: string;
-  dash_url: string;
-  duration: number;
-  hls_url: string;
-  is_gif: boolean;
-  transcoding_status: string;
+interface ListingData {
+  after: string | null;
+  dist: number;
+  modhash: string;
+  geo_filter: string;
+  children: RedditPost[];
+  before: string | null;
 }
 
-interface SecureMedia {
-  reddit_video?: RedditVideo;
+interface RedditPost {
+  kind: string;
+  data: PostData;
 }
 
 interface PostData {
@@ -47,15 +43,15 @@ interface PostData {
   subreddit_type: string;
   ups: number;
   total_awards_received: number;
-  media_embed: Record<string, any>;
+  media_embed: Record<string, unknown>;
   author_flair_template_id: string | null;
   is_original_content: boolean;
-  user_reports: any[];
-  secure_media: SecureMedia | null;
+  user_reports: unknown[];
+  secure_media: RedditMedia | null;
   is_reddit_media_domain: boolean;
   is_meta: boolean;
   category: string | null;
-  secure_media_embed: Record<string, any>;
+  secure_media_embed: Record<string, unknown>;
   link_flair_text: string;
   can_mod_post: boolean;
   score: number;
@@ -65,9 +61,9 @@ interface PostData {
   thumbnail: string;
   edited: number | boolean;
   author_flair_css_class: string | null;
-  author_flair_richtext: any[];
-  gildings: Record<string, any>;
-  content_categories: string | null;
+  author_flair_richtext: AuthorFlairRichtext[];
+  gildings: Record<string, unknown>;
+  content_categories: string[] | null;
   is_self: boolean;
   mod_note: string | null;
   created: number;
@@ -82,21 +78,22 @@ interface PostData {
   likes: boolean | null;
   suggested_sort: string | null;
   banned_at_utc: number | null;
+  url_overridden_by_dest?: string;
   view_count: number | null;
   archived: boolean;
   no_follow: boolean;
   is_crosspostable: boolean;
   pinned: boolean;
   over_18: boolean;
-  all_awardings: any[];
-  awarders: any[];
+  all_awardings: unknown[];
+  awarders: unknown[];
   media_only: boolean;
   link_flair_template_id: string;
   can_gild: boolean;
   spoiler: boolean;
   locked: boolean;
   author_flair_text: string | null;
-  treatment_tags: any[];
+  treatment_tags: unknown[];
   visited: boolean;
   removed_by: string | null;
   num_reports: number | null;
@@ -108,13 +105,13 @@ interface PostData {
   link_flair_background_color: string;
   id: string;
   is_robot_indexable: boolean;
-  report_reasons: any[] | null;
+  report_reasons: string[] | null;
   author: string;
   discussion_type: string | null;
   num_comments: number;
   send_replies: boolean;
   contest_mode: boolean;
-  mod_reports: any[];
+  mod_reports: unknown[];
   author_patreon_flair: boolean;
   author_flair_text_color: string | null;
   permalink: string;
@@ -123,25 +120,47 @@ interface PostData {
   subreddit_subscribers: number;
   created_utc: number;
   num_crossposts: number;
-  media: any | null;
+  media: RedditMedia | null;
   is_video: boolean;
 }
 
-interface RedditPost {
-  kind: string;
-  data: PostData;
+interface LinkFlairRichtext {
+  e: string;
+  t: string;
 }
 
-interface ListingData {
-  after: string | null;
-  dist: number;
-  modhash: string;
-  geo_filter: string;
-  children: RedditPost[];
-  before: string | null;
+interface AuthorFlairRichtext {
+  e: string;
+  t: string;
 }
 
-export interface RedditListingResponse {
-  kind: "Listing";
-  data: ListingData;
+interface RedditMedia {
+  reddit_video?: RedditVideo;
 }
+
+interface RedditVideo {
+  bitrate_kbps: number;
+  fallback_url: string;
+  has_audio: boolean;
+  height: number;
+  width: number;
+  scrubber_media_url: string;
+  dash_url: string;
+  duration: number;
+  hls_url: string;
+  is_gif: boolean;
+  transcoding_status: string;
+}
+
+export type RedditApiResponse = RedditListing;
+
+export type {
+  RedditListing,
+  ListingData,
+  RedditPost,
+  PostData,
+  LinkFlairRichtext,
+  AuthorFlairRichtext,
+  RedditMedia,
+  RedditVideo,
+};
