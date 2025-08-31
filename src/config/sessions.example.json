@@ -1,0 +1,20 @@
+{
+  "user1": [
+    {
+      "name": "reddit_session",
+      "value": "<Enter value>",
+      "domain": ".reddit.com",
+      "path": "/",
+      "httpOnly": true,
+      "secure": true
+    },
+    {
+      "name": "token_v2",
+      "value": "<Enter value>",
+      "domain": ".reddit.com",
+      "path": "/",
+      "httpOnly": true,
+      "secure": true
+    }
+  ]
+}
