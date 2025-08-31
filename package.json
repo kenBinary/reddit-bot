@@ -8,7 +8,7 @@
     "node": "22.x"
   },
   "scripts": {
-    "dev": "ts-node src/index.ts",
+    "dev": "tsx src/index.ts",
     "build": "tsc",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
@@ -24,7 +24,7 @@
     "@types/node": "^24.3.0",
     "eslint": "^9.34.0",
     "prettier": "3.6.2",
-    "ts-node": "^10.9.2",
+    "tsx": "^4.20.5",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.41.0"
   },
